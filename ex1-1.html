@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas-element-id" width="800" height="600">
+		no html5
+	</canvas>
+	<script type="text/javascript">
+		var gl = null;
+		function getGLContext() {
+			var canvas = document.getElementById("canvas-element-id");
+			if(canvas) {
+				var names = ["webgl", "experimental-webgl", "webkit-3d", "moz-webgl"];
+				names.map(function (item) {
+					if(!gl) {
+						try {
+							gl = canvas.getContext(item);
+						} catch (e) {}
+					}
+				});
+			}
+		}
+		getGLContext();
+	</script>
+</body>
+</html>
