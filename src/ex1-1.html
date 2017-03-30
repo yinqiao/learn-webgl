@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>canvas</title>
+	<style>
+        canvas {
+            border: 2px dotted blue;
+        }
+    </style>
+</head>
+<body>
+	<canvas id="canvas-element-id" width="800" height="600">
+		no html5
+	</canvas>
+	<script type="text/javascript">
+		var gl = null,
+			c_width = 0,
+			c_height = 0;
+		function getGLContext() {
+			var canvas = document.getElementById("canvas-element-id");
+			if(canvas) {
+				var names = ["webgl", "experimental-webgl", "webkit-3d", "moz-webgl"];
+				names.map(function (item) {
+					if(!gl) {
+						try {
+							gl = canvas.getContext(item);
+						} catch (e) {}
+						console.log(item)
+					}
+				});
+			}
+		}
+		getGLContext();
+
+		function checkKey(ev) {
+			switch(ev.keyCode) {
+				case 49: //1
+					gl.clearColor(0.3, 0.7, 0.2, 1.0);
+					clear(gl);
+					break;
+				case 50: //2
+					gl.clearColor(0.7,0.2,0.5,0.1);
+					clear(gl);
+					break;
+				case 51: //3
+					gl.clearColor(0.1,0.1,0.2,0.2);
+					clear(gl);
+					window.focus();
+					break;
+				default: 
+					window.focus();
+			}
+		}
+		window.onkeydown = checkKey;
+
+		function clear(ctx) {
+			ctx.clear(ctx.COLOR_BUFFER_BIT);
+			ctx.viewport(0,0,c_width,c_height);
+		}
+
+	</script>
+</body>
+</html>
